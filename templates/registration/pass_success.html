@@ -1,0 +1,30 @@
+{%extends 'base.html' %}
+
+
+  {% block title %}
+  Password Change Successful
+  {% endblock %}
+
+
+{% block content%}
+ <div class="container  my-5 py-5 z-depth-1">
+<div class="container">
+		<div class="alert alert-success" role="alert">
+		  <h4 class="alert-heading">Success!</h4>
+		  <p>You have changed your password successfully.
+		  </p>
+		  <hr>
+		  <p class="mb-0">If you are not redirected automatically click the button below to take you to home.</p>
+		</div>
+<br>
+
+	<div class="text-center">
+		<a href="{% url 'blog:article-list' %}">
+		  <button type="submit" class="btn btn-success">
+		  Home
+		  </button>
+		 </a>
+		 </div>
+</div>
+</div>
+ {% endblock %}
