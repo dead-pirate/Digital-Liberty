@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+
+          {% block css %}
+          {% endblock %}
+
+          <style type="text/css">
+
+
+            body {
+
+              margin-top: 10px;
+              height: 100%;
+            }
+            .fab:hover {
+            opacity: 0.7;
+            }
+            ul.social-network {
+/*                      list-style: none;
+                      display: inline;*/
+                      margin-left: 0 !important;
+                      padding: 0
+                  }
+
+                ul.social-network li {
+                    display: inline;
+                    margin: 0 5px
+                }
+
+            .social-network a.icoFacebook:hover {
+                background-color: #3B5998
+            }
+
+            .social-network a.icoTwitter:hover {
+                background-color: #33ccff
+            }
+
+            .social-network a.icoInsta:hover {
+                background-color: #FF4500
+            }
+            .social-network a.icoLinkedIn:hover {
+                background-color: #0072b1
+            }
+
+
+            .social-network a.icoFacebook:hover i,
+            .social-network a.icoTwitter:hover i,
+            .social-network a.icoLinkedIn:hover i,
+            .social-network a.icoInsta:hover i {
+                color: #fff
+            }
+
+          a.socialIcon:hover,
+          .socialHoverClass {
+              color: #44BCDD
+          }
+
+          .social-circle li a {
+              display: inline-block;
+              position: relative;
+              margin: 0 auto 0 auto;
+              border-radius: 50%;
+              text-align: center;
+              width: 50px;
+              height: 50px;
+              font-size: 20px
+          }
+
+          .social-circle li i {
+              margin: 0;
+              line-height: 50px;
+              text-align: center
+          }
+
+          .social-circle li a:hover i,
+          .triggeredHover {
+              transform: rotate(360deg);
+              transition: all 0.2s
+          }
+
+          .social-circle i {
+              color: #fff;
+              transition: all 0.8s;
+              transition: all 0.8s
+          }
+
+          nav{
+            font-family: monospace;
+          }
+
+          </style>
+
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    <!-- Fontisto CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fontisto@v3.0.4/css/fontisto/fontisto.min.css">
+
+    <!-- Google CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Gaegu&family=Lemonada:wght@500&family=Mansalva&family=Oswald:wght@200;400&family=Oxanium:wght@200;400&family=Rowdies:wght@300&family=Teko:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
+    <!-- MD Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+
+
+
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+      
+    
+
+    <title> {% block title %}
+            DIGITAL LIBERTY
+            {% endblock %}
+    </title>
+
+    <!--    Script for navbar -->
+    <script type="text/javascript">
+
+      $(function () {
+    $(window).on('scroll', function () {
+        if ( $(window).scrollTop() > 10 ) {
+            $('.navbar').addClass('bg-light');
+        } else {
+            $('.navbar').removeClass('bg-light');
+        }
+                });
+            });
+
+    </script>
+    {% load imagekit %}
+    {% load static %}
+  </head>
+
+  <!--    Body  -->
+
+  <body class="purple-gradient">
+
+
+
+<header class="header">
+      <nav class="navbar navbar-expand-lg fixed-top navbar-light purple-gradient">
+        <a class="navbar-brand" href="{% url 'pages:home' %}">DIGITAL LIBERTY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-tags"></i> Tags <i class="fas fa-angle-down"></i>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          {% for tag in category %}
+          <a class="dropdown-item" href="{% url 'blog:tag-view' tag %}">{{ tag|title}}</a>
+          {% endfor %}
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'blog:tag-page' %}">Complete Tag List</a>
+        </div>
+
+        </li>
+      <li class="nav-item">
+      <a class="nav-link " href="{% url 'blog:article-list' %}"><i class="fas fa-newspaper"></i> Posts</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link " href="{% url 'contact' %}"><i class="fas fa-file-signature"></i>Contact</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link " href="{% url 'about' %}"><i class="fas fa-info-circle"></i> About</a>
+      </li>
+    </ul>
+
+    <!--                     Drop Down for profile         -->
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+        <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-sliders-h"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+          {% if user.is_authenticated %}
+          
+            {% if user.profile.id %}
+            <a class="dropdown-item" href="{% url 'users:profile-page' user.profile.id %}">{% thumbnail '50x50' user.profile.get_disp_pic -- class="rounded-circle" %} {{ user.first_name|title }} {{ user.last_name|title}}</a>
+         <!--  <a class="dropdown-item" href="{% url 'users:profile-page' user.id %}"><i class="fas fa-user-circle"></i> Profile</a> -->
+          <a class="dropdown-item" href="{% url 'users:edit-profile-page' user.id %}">    <i class="fas fa-user-edit"></i> Update profile</a>
+            {% else %}
+          <a class="dropdown-item" href="{% url 'users:create-profile-page'%}">{{ user.first_name|title }} {{ user.last_name|title}}</a>
+          <a class="dropdown-item" href="{% url 'users:create-profile-page'%}"> Create Profile</a>
+            {% endif %}
+          <a class="dropdown-item" href="{% url 'users:settings-profile' %}">  <i class="fas fa-user-cog"></i> Settings</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'logout' %}">   <i class="fas fa-sign-out-alt"></i> Logout</a>
+
+          {% else %}
+
+          <a class="dropdown-item" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
+          <a class="dropdown-item" href="{% url 'users:register' %}"><i class="fas fa-user-circle"></i> Register</a>
+
+          {% endif %}
+
+
+        </div>
+        </li>
+      </ul>
+
+</div>
+</nav>
+</header>
+
+<br>
+      {%block content%}{%endblock%}
+<br><br>
+
+
+
+
+<!-- Footer -->
+<footer class="page-footer font-small purple-gradient pt-4">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!-- Social buttons -->
+  <ul class="social-network social-circle list-unstyled list-inline text-center">
+  <li class="list-inline-item"><a href="#" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+  <li class="list-inline-item"><a href="#" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+  <li class="list-inline-item"><a href="#" class="icoInsta" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+  <li class="list-inline-item"><a href="#" class="icoLinkedin" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+  </ul>
+
+    <!-- Social buttons -->
+
+  </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">©  {% now "Y" %}  Copyright:
+    <a href="#"> DIGITAL LIBERTY</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+
+</body>
+    
+
+</html>

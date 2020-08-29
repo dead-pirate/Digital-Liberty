@@ -1,0 +1,269 @@
+{%extends 'base.html' %}
+{% load static %}
+{% block css %}
+
+	<style type="text/css">
+	
+		h2,h4{
+			font-family: 'Oxanium', cursive;
+			color: black;
+
+
+		}
+
+		p{
+			font-family: 'Cutive Mono', monospace;
+			color: black;
+		}
+
+
+
+	</style>
+{% endblock %}
+{% load imagekit %}
+{% block content %}
+
+<div class="container">
+	  								<!-- Create profile message -->
+<br><br>
+
+	{% if user.is_authenticated %}
+	 	{%  if not user.profile %}
+
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			  <strong>ALERT!</strong> You should <b><a href="{% url 'users:create-profile-page'%}" style="color: #856404;">create a profile </a></b> for full functionality.
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+		{% endif %}
+
+	{% else %}
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			  <strong>ALERT!</strong> You should <b><a href="{% url 'login' %}"  style="color: #856404;"> Login.</a></b>
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+	{% endif %}
+
+												
+
+												<!-- Carousel -->
+<!--Carousel Wrapper-->
+<div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+  <!--Indicators-->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-2" data-slide-to="1"></li>
+    <li data-target="#carousel-example-2" data-slide-to="2"></li>
+  </ol>
+  <!--/.Indicators-->
+  <!--Slides-->
+  <div class="carousel-inner" role="listbox">
+    <div class="carousel-item active">
+      <div class="view">
+        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg"
+          alt="First slide">
+        <div class="mask rgba-black-light"></div>
+      </div>
+      <div class="carousel-caption">
+        <h3 class="h3-responsive">Light mask</h3>
+        <p>First text</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <!--Mask color-->
+      <div class="view">
+        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(6).jpg"
+          alt="Second slide">
+        <div class="mask rgba-black-strong"></div>
+      </div>
+      <div class="carousel-caption">
+        <h3 class="h3-responsive">Strong mask</h3>
+        <p>Secondary text</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <!--Mask color-->
+      <div class="view">
+        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(9).jpg"
+          alt="Third slide">
+        <div class="mask rgba-black-slight"></div>
+      </div>
+      <div class="carousel-caption">
+        <h3 class="h3-responsive">Slight mask</h3>
+        <p>Third text</p>
+      </div>
+    </div>
+  </div>
+  <!--/.Slides-->
+  <!--Controls-->
+  <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+  <!--/.Controls-->
+</div>
+<!--/.Carousel Wrapper-->	
+<br><br><hr><br>
+
+									<!-- Card Decks Goes Here -->
+
+									
+
+<div class="container mt-5">
+
+
+  <!--Section: Content-->
+  <section class="dark-grey-text text-center">
+
+    <!-- Section heading -->
+    <h2 class="font-weight-bold mb-4 pb-2">Recent posts</h2>
+    <!-- Section description -->
+    <p class="text-center mx-auto w-responsive mb-5">
+    Recently Added Posts You will Love</p>
+
+  	<!-- Grid row -->
+    <div class="row">
+
+    			{% for item in recent_posts %}
+
+      <!-- Grid column -->
+      <div class="col-lg-4 col-md-12 mb-4">
+
+	        <!-- Featured image -->
+	        <div class="view overlay rounded z-depth-2 mb-4">
+<!-- 	          <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/81.jpg" alt="Sample image"> -->
+				{% thumbnail '780x520' item.get_image -- class="img-fluid" %}
+	          <a href="{% url 'blog:article-detail' item.post_no %}">
+	            <div class="mask rgba-white-slight"></div>
+	          </a>
+	        </div>
+
+       		 <!-- Category -->
+	        <a href="{% url 'blog:tag-view' item.category %}" class="pink-text">
+	          <h6 class="font-weight-bold mb-3" style="color: #03045e;"><i class="fas fa-tag fa-sm"></i> {{ item.category|title }}</h6>
+	        </a>
+	        <!-- Post title -->
+	        <h4 class="font-weight-bold mb-3" style="color: black;"><strong>{{ item.title|title }}</strong></h4>
+	        <!-- Post data -->
+	        <p style="color: black;"><a class="font-weight-bold">{{ item.author.first_name|title }} {{ item.author.last_name|title }}</a>
+	        <br>
+	         <i class="far fa-clock fa-sm"></i> {{ item.date }}</p>
+	        <!-- Excerpt -->
+	        <p style="color: black;">{{ item.snippet|safe}}</p>
+	        <!-- Read more button -->
+	        <a href="{% url 'blog:article-detail' item.post_no %}" class="btn btn-info btn-rounded btn-md">Read more</a>
+
+      </div>
+      <!-- Grid column -->
+
+      	{% endfor %}
+    </div>
+    <!-- Grid row -->
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+
+
+
+<!--    TOP POSTS -->
+<div class="container mt-5">
+
+
+  <!--Section: Content-->
+  <section class="dark-grey-text text-center">
+
+    <!-- Section heading -->
+    <h2 class="font-weight-bold mb-4 pb-2">Top posts</h2>
+    <!-- Section description -->
+    <p class="text-center mx-auto w-responsive mb-5">Whats Everybody Reading</p>
+
+  	<!-- Grid row -->
+    <div class="row">
+
+		{% for item in top_posts %}
+
+      <!-- Grid column -->
+      <div class="col-lg-4 col-md-12 mb-4">
+
+	        <!-- Featured image -->
+	        <div class="view overlay rounded z-depth-2 mb-4">
+<!-- 	          <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/81.jpg" alt="Sample image"> -->
+				{% thumbnail '780x520' item.get_image -- class="img-fluid" %}
+	          <a href="{% url 'blog:article-detail' item.post_no %}">
+	            <div class="mask rgba-white-slight"></div>
+	          </a>
+	        </div>
+
+        <!-- Category -->
+	        <a  href="{% url 'blog:tag-view' item.category %}" class="pink-text">
+	          <h6 class="font-weight-bold mb-3" style="color: #03045e;"><i class="fas fa-tag fa-sm"></i>  {{ item.category|title }}</h6>
+	        </a>
+	        <!-- Post title -->
+	        <h4 class="font-weight-bold mb-3" style="color: black;"><strong>{{ item.title|title }}</strong></h4>
+	        <!-- Post data -->
+	        <p style="color: black;"><a class="font-weight-bold" >{{ item.author.first_name|title }} {{ item.author.last_name|title }}</a>
+	        <br>
+	         <i class="far fa-clock fa-sm" ></i> {{ item.date }}</p>
+	        <!-- Excerpt -->
+	        <p style="color: black;">{{ item.snippet|safe}}</p>
+	        <!-- Read more button -->
+	        <a href="{% url 'blog:article-detail' item.post_no %}" class="btn btn-info btn-rounded btn-md">Read more</a>
+
+      </div>
+      <!-- Grid column -->
+
+      	{% endfor %}
+
+
+    </div>
+    <!-- Grid row -->
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ {% endblock %}
