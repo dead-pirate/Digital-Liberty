@@ -1,0 +1,24 @@
+{%extends 'base.html' %}
+
+
+  {% block title %}
+      Settings
+  {% endblock %}
+
+
+{% block content%}
+ <div class="container  my-5 py-5 z-depth-1">
+<h1 class="text-center">Settings</h1>
+
+<br>
+
+<form class="create_post" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <div class="text-center">
+  <button type="submit" class="btn btn-success">Update</button>
+  </div>
+</form>
+</div>
+
+{% endblock %}

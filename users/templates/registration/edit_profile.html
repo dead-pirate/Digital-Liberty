@@ -1,0 +1,216 @@
+{%extends 'base.html' %}
+{% load static %}
+
+
+  {% block title %}
+ 	Update profile
+  {% endblock %}
+
+
+{% block content%}
+{% load imagekit %}
+
+  <br>
+ <div class="container  my-5 py-5 z-depth-1">
+
+   {% if user.is_authenticated %}
+
+
+	   	{% if user.id == profile.user.id %}
+	   			 <strong><h3 style="text-align: center;">UPDATE PROFILE </h3></strong>
+
+		      <br><br><hr>
+
+
+		      <div class="col-md-7 col-lg-12 mr-auto">
+            <form method = "POST" enctype="multipart/form-data">
+            	{% csrf_token %}
+                <div class="row">
+
+                    <!-- BIO -->
+                    <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="far fa-address-card fa-lg"></i>
+                            </span>
+                        </div>
+
+						{{ form.bio }}
+                    </div>
+
+
+                    <!-- Gender -->
+
+                    <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fas fa-male fa-lg"></i>
+                            </span>
+                        </div>
+    					{{ form.gender}}                
+                    </div>
+
+                     <!-- Profession -->
+                
+                    <div class="input-group col-lg-12 mb-4">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fas fa-user-tie fa-lg"></i>
+                            </span>
+    
+                          </div>
+                          	{{ form.profession }}
+                    </div>
+
+
+
+                    <!-- Profile Pic -->
+
+                    		<div class="input-group col-lg-12 mb-4">
+
+                    			<!-- <img src="{{ user.profile.get_disp_pic.url }}"> -->
+                    			{% thumbnail '125x125' user.profile.get_disp_pic -- class="rounded-circle" %}
+
+                    			<input type='submit' name='disp_pic-clear' value='remove' id='disp_pic-clear_id' class ="btn btn-outline-danger btn-sm ">
+
+
+                    		</div>
+				           
+
+							<div class="input-group col-lg-12 mb-4">
+								<div class="custom-file">
+
+								  <input type="file" class="custom-file-input"  name="disp_pic" id="id_disp_pic">
+
+								  <label class="custom-file-label" >Choose Profile Pic</label>
+								</div>
+								
+							</div>
+							
+								<script type="application/javascript">
+								    $('input[type="file"]').change(function(e){
+								        var fileName = e.target.files[0].name;
+								        $('.custom-file-label').html(fileName);
+								    });
+								</script>
+
+
+					
+
+                <!-- Links -->
+
+                    <!-- FB -->
+
+                    <div class="input-group col-lg-12 mb-4">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fab fa-facebook fa-lg"></i>
+                            </span>
+						  </div>
+
+						  {{ form.fb }}
+                	</div>
+
+                	<!-- Twitter -->
+
+                    <div class="input-group col-lg-12 mb-4">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fab fa-twitter fa-lg"></i>
+                            </span>
+	
+						  </div>
+
+						  {{ form.twitter }}
+                	</div>
+
+					<!-- Instagram -->
+
+                    <div class="input-group col-lg-12 mb-4">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fab fa-instagram fa-lg"></i>
+                            </span>
+	
+						  </div>
+						  {{ form.insta }}
+                	</div>
+
+					<!-- GitHub -->
+
+                    <div class="input-group col-lg-12 mb-4">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fab fa-github fa-lg"></i>
+                            </span>
+	
+						  </div>
+
+						  {{ form.git_hub }}
+                	</div>
+                    <!-- Pinterest-->
+
+                    <div class="input-group col-lg-12 mb-4">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fab fa-pinterest-p fa-lg"></i>
+                            </span>
+    
+                          </div>
+						{{ form.pinterest }}
+                    </div>
+
+
+                    <!-- Linked In -->
+
+                    <div class="input-group col-lg-12 mb-4">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fab fa-linkedin-in fa-lg"></i>
+                            </span>
+    
+                          </div>
+						{{ form.linked_in }}
+                    </div>
+
+					<!-- External Link -->
+
+                    <div class="input-group col-lg-12 mb-4">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <span class="material-icons">public</span>
+                            </span>
+	
+						  </div>
+
+						  {{ form.ex_link}}
+                	</div>
+                  
+
+                    <!-- Submit Button -->
+                    <div class="form-group col-lg-12 mx-auto mb-0">
+                        <button type="submit" class="btn btn btn-outline-success btn-block py-2 rounded-pill" >
+                            <span class="font-weight-bold" style="color: black;">Update Profile</span>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+<br><br>
+
+		{% else  %}
+
+	        <p> Page Does Not Exist </p>
+	        
+	    {% endif %}
+
+	{% else  %}
+
+        <p> Page Does Not Exist </p>
+        
+    {% endif %}
+
+{% endblock %}

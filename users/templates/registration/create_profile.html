@@ -1,0 +1,189 @@
+{%extends 'base.html' %}
+
+
+  {% block title %}
+ 	Create Profile
+  {% endblock %}
+
+
+{% block content%}
+
+
+<br><br><hr><br>
+
+ <div class="container  my-5 py-5 z-depth-1">
+
+ {% if user.is_authenticated %}
+ <strong><h3 style="text-align: center;">CREATE PROFILE </h3></strong>
+ <br>
+
+<div class="col-md-7 col-lg-12 mr-auto">
+            <form method = "POST" enctype="multipart/form-data">
+            	{% csrf_token %}
+                <div class="row">
+
+                    <!-- BIO -->
+                    <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="far fa-address-card fa-lg"></i>
+                            </span>
+                        </div>
+						<textarea  type="text" name="bio" cols="40" rows="10" placeholder="Let Others Know Who You Are" id="id_bio" class="form-control bg-white border-left-0 border-md" ></textarea>
+                    </div>
+
+                    <!-- Gender -->
+
+                    <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fas fa-male fa-lg"></i>
+                            </span>
+                        </div>
+                        <select name="gender" id="id_gender" class="form-control custom-select bg-white border-left-0 border-md" > 
+                          <option value="" selected>---------</option>
+
+						  <option value="Male">Male</option>
+
+						  <option value="Female">Female</option>
+
+						  <option value="NonBinary">Non Binary</option>
+						  </select>
+
+                    </div>
+
+                    <!-- Profile Pic -->
+
+					<div class="input-group col-lg-12 mb-4">
+						<div class="custom-file">
+						  <input type="file" class="custom-file-input"  name="disp_pic" id="id_disp_pic">
+						  <label class="custom-file-label" >Choose Profile Pic</label>
+						</div>
+					</div>
+
+                    <script type="application/javascript">
+                        $('input[type="file"]').change(function(e){
+                            var fileName = e.target.files[0].name;
+                            $('.custom-file-label').html(fileName);
+                        });
+                    </script>
+
+                <!-- Profession -->
+
+                    <div class="input-group col-lg-12 mb-4">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fas fa-user-tie fa-lg"></i>
+                            </span>
+    
+                          </div>
+                          <input type="text" class="form-control bg-white border-left-0 border-md" name="profession" placeholder="Artist,Programmer,Blogger etc." id="id_profession" maxlength="500"> 
+                    </div>
+
+                <!-- Links -->
+
+                    <!-- FB -->
+
+                    <div class="input-group col-lg-12 mb-4">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fab fa-facebook fa-lg"></i>
+                            </span>
+	
+						  </div>
+						  <input type="text" class="form-control bg-white border-left-0 border-md" name="fb" placeholder="http://your_fb_link_here.com" id="id_fb" maxlength="500">	
+                	</div>
+
+                	<!-- Twitter -->
+
+                    <div class="input-group col-lg-12 mb-4">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fab fa-twitter fa-lg"></i>
+                            </span>
+	
+						  </div>
+						  <input type="text" name="twitter" class="form-control bg-white border-left-0 border-md" placeholder="http://your_twitter_link_here.com" maxlength="500" id="id_twitter" >	
+                	</div>
+
+					<!-- Instagram -->
+
+                    <div class="input-group col-lg-12 mb-4">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fab fa-instagram fa-lg"></i>
+                            </span>
+	
+						  </div>
+						  <input type="text" name="insta" class="form-control bg-white border-left-0 border-md" placeholder="http://your_insta_link_here.com" maxlength="500" id="id_insta">	
+                	</div>
+
+					<!-- GitHub -->
+
+                    <div class="input-group col-lg-12 mb-4">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fab fa-github fa-lg"></i>
+                            </span>
+	
+						  </div>
+						  <input type="text" name="git_hub" class="form-control bg-white border-left-0 border-md" placeholder="http://your_git_link_here.com" id="id_git_hub">	
+                	</div>
+
+                                        <!-- Pinterest-->
+
+                    <div class="input-group col-lg-12 mb-4">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fab fa-pinterest-p fa-lg"></i>
+                            </span>
+    
+                          </div>
+                          <input type="text" name="pinterest" class="form-control bg-white border-left-0 border-md" placeholder="http://your_pin_here.com" maxlength="500" id="id_pinterest">  
+                    </div>
+
+                                        <!-- Linked In -->
+
+                    <div class="input-group col-lg-12 mb-4">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <i class="fab fa-linkedin-in fa-lg"></i>
+                            </span>
+    
+                          </div>
+                          <input type="text" name="Linked_in" class="form-control bg-white border-left-0 border-md" placeholder="http://your_linkedin_here.com" maxlength="500" id="id_linked_in">  
+                    </div>
+
+					<!-- External Link -->
+
+                    <div class="input-group col-lg-12 mb-4">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text bg-white px-4 border-md border-right-0" id="basic-addon3">
+                                <span class="material-icons">public</span>
+                            </span>
+	
+						  </div>
+						  <input type="text" name="ex_link" class="form-control bg-white border-left-0 border-md" placeholder="http://your_link_here.com" maxlength="500" id="id_ex_link">	
+                	</div>
+                  
+
+                    <!-- Submit Button -->
+                    <div class="form-group col-lg-12 mx-auto mb-0">
+                        <button type="submit" class="btn btn btn-outline-success btn-block py-2 rounded-pill">
+                            <span class="font-weight-bold" style="color: black;">Create your Profile</span>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+</div>
+<br><br>
+
+{% else  %}
+
+        <p> Page Does Not Exit </p>
+        
+{% endif %}
+
+{% endblock %}
