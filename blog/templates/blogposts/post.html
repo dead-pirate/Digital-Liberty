@@ -1,0 +1,385 @@
+{%extends 'base.html' %}
+{% load static %}
+{% block css %}
+<style>
+  div {
+    display: block;
+}
+
+.single-thumbnail {
+  height: 550px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  background-blend-mode: multiply,multiply;
+  background-size: cover;
+  background-position: center;
+/*  min-width: 100%;
+  min-height: 100%;*/
+}
+
+.single-thumbnail-inside {
+  height: 550px;
+  width: 100%;
+}
+
+.single-thumbnail.boxed {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.thumbnail-classic {
+  display: block;
+  width: 100%;
+  max-width: 920px;
+  height: auto;
+  margin: 50px auto 10px auto;
+}
+
+.thumbnail-classic.ws,
+.thumbnail-classic.boxed,
+.thumbnail-classic.fullwidth {
+  max-width: 100%;
+}
+
+.single-title-zone {
+  max-width: 730px !important;
+  margin-bottom: 30px;
+}
+
+.single-title-zone .category {
+  margin-bottom: 22px;
+  font-family: 'Oxanium', cursive;
+  font-weight: 500;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.single-title-zone .category a {
+  padding: 0 10px 0 10px;
+  color: #ffffff;
+  border-left: 1px solid rgba(224, 224, 224, 0.42);
+  opacity: 0.5;
+  transition: 0.1s;
+}
+
+.single-title-zone .category a:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.single-title-zone .category a:hover,
+.single-title-zone .category a:focus {
+  text-decoration: none;
+  opacity: 1;
+  transition: 0.1s;
+}
+
+.single-title-zone h1 {
+  margin-top: 6px;
+  margin-bottom: 13px;
+  color: white;
+  font-family: 'Oxanium', cursive;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 37px;
+}
+
+.single-title-zone .date {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  opacity: 0.7;
+}
+
+.single-title-zone .min-read {
+  margin-left: 8px;
+  font-family: 'Cutive Mono', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  opacity: 0.7;
+}
+.post {
+
+    margin: 20px;
+    position: relative;
+    width: 100%;
+    min-height: 1px; 
+    padding-right: ($gutter / 2);
+    padding-left: ($gutter / 2);
+    align-items: center!important;
+}
+
+.post .entry-content p {
+
+  max-width: 730px;
+  margin: 20px auto 25px auto;
+  color: #424242;
+  font-family: 'Cutive Mono', monospace;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 35px;
+}
+
+.btn {
+    position: relative;
+    padding: 12px 30px;
+    margin: .3125rem 1px;
+    font-size: .75rem;
+    font-weight: 400;
+    line-height: 1.428571;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    border: 0;
+    border-radius: .2rem;
+    outline: 0;
+    transition: box-shadow .2s cubic-bezier(.4,0,1,1),background-color .2s cubic-bezier(.4,0,.2,1);
+    will-change: box-shadow,transform;
+}
+
+.btn.btn-just-icon {
+    font-size: 20px;
+    height: 41px;
+    min-width: 41px;
+    width: 41px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    line-height: 41px;
+}
+
+.btn.btn-just-icon fi{
+    margin-top: 0;
+    position: absolute;
+    width: 100%;
+    transform: none;
+    left: 0;
+    top: 0;
+    height: 100%;
+    line-height: 41px;
+    font-size: 20px;
+}
+.btn.btn-link{
+    background-color: transparent;
+
+  /*  color: #999;*/
+}
+
+.like ,.likecount{
+  text-align: center;
+}
+.comment {
+      border: none;
+      border-bottom: 2px solid #cecece;
+      transition: 0.2s;
+
+}
+
+ h3,h5{
+  font-family: 'Oxanium', cursive;
+ }
+
+</style>
+{% endblock %}
+{% load imagekit %}
+
+{% block title %}
+{{object.title}}
+{% endblock %}
+
+{% block content%}
+
+
+                                                                <!-- HEAD -->
+
+<div class="single-thumbnail" style="background-image: url({{ object.get_image.url }});">
+
+    <div class="container">
+
+      <div class="single-thumbnail-inside row align-items-end">
+
+        <div class="single-title-zone mx-auto col">
+
+          <span class="category"><a href="{% url 'blog:tag-view' object.category|slugify %}">{{ object.category|title }}</a> </span>
+
+          <h1>{{ object.title }}</h1>
+          
+            <span class="date"><i class="far fa-clock fa-sm"></i> {{ object.date }}</span>
+          
+        </div><!-- /.single-title-zone -->
+
+      </div><!-- /.single-thumbnail-inside -->
+
+    </div><!-- /.container -->
+
+</div>
+                                                                  <!-- BODY -->
+
+<div class="container">
+
+  <div class="row">
+
+      <div class="post">
+
+      <article class="article">
+
+        <div class="entry-content">
+
+
+        <p>{{ object.content|safe }} </p>
+
+        </div>  
+      
+      </article>
+      
+      </div>
+  </div>
+</div>
+
+                                                                <!-- Author Card -->
+
+
+
+<!-- LIKE/UNLIKE -->
+
+    <div class="container like">
+  {% if user.is_authenticated %}
+    <form action="{% url 'blog:likes_post' object.post_no %}" method="POST">
+      {% csrf_token %}
+        {% if is_liked %}
+          <input type="image" src="{% static 'blog/images/like.png' %}" style="border:0; text-decoration:none; outline:none" data-container="body" data-toggle="tooltip" data-placement="top" title="Unlike">
+        {% else %}
+          <input type="image" src="{% static 'blog/images/unlike.png' %}" style="border:0; text-decoration:none; outline:none" data-container="body" data-toggle="tooltip" data-placement="top" title="Like">
+        {% endif %}
+    </form>
+  {% else %}
+
+    <a href="{% url 'login' %}">
+      <input type="image" src="{% static 'blog/images/like.png' %}" style="border:0; text-decoration:none; outline:none" data-container="body" data-toggle="tooltip" data-placement="top" title="Login to like or dislike this post">
+    </a>
+      <script type="text/javascript">
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
+      </script>
+
+    {% endif %} 
+    <br>
+    <span class="likecount"> {{likes}} likes</span>
+    </div>
+  
+
+
+  <hr>
+
+<!-- margin-left: 20px; -->
+  <br>
+    <div class="container" style="text-align: center;  ">
+  <a href="{% url 'blog:article-list' %}" class="btn btn-success">Back</a>
+  {% if user.is_authenticated %}
+
+      {% if user.id == object.author.id or user.is_superuser %}
+          <a class="btn btn-danger" href="{% url 'blog:article-delete' object.post_no %}">Delete</a>
+          <a class="btn btn-info" href="{% url 'blog:article-delete' object.post_no %}">Update</a>
+      {% endif %}
+      
+  {% endif %}
+
+</div>
+
+<hr><br><br>
+<div class="container" >
+<div class=" mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-2 mx-2 my-2">
+        {% thumbnail '150x150' object.author.profile.get_disp_pic -- class=" rounded-circle dp " %}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><strong><a href="{% url 'users:profile-page' object.author.id %}" style="color: black;">
+        {{object.author.first_name|title}} {{object.author.last_name|title}}</a></strong></h5>
+        <h6 style="font-family: 'VT323', monospace;">{{ object.author.ptofile.profession }}</h6>
+        <p class="card-text">
+          <small >
+            {% if object.author.profile.fb %}
+            <a href="{{ object.author.profile.fb }}" class="btn btn-just-icon btn-link"><i class="fi fi-facebook"></i></a>
+            {% endif %}
+            {% if object.author.profile.twitter %}
+            <a href="{{ object.author.profile.twitter }}" class="btn btn-just-icon btn-link"><i class="fi fi-twitter"></i></a>
+            {% endif %}
+            {% if object.author.profile.insta %}
+            <a href="{{ object.author.profile.insta }}" class="btn btn-just-icon btn-link"><i class="fi fi-instagram"></i></a>
+            {% endif %}
+            {% if object.author.profile.pinterest %}
+            <a href="{{ object.author.profile.pinterest}}" class="btn btn-just-icon btn-link"><i class="fi fi-pinterest"></i></a>
+            {% endif %}
+            {% if object.author.profile.git_hub %}
+            <a href="{{ object.author.profile.git_hub }}" class="btn btn-just-icon btn-link"><i class="fi fi-github"></i></a>
+            {% endif %}
+            {% if object.author.profile.linked_in %}
+            <a href="{{ object.author.profile.linked_in }}" class="btn btn-just-icon btn-link"><i class="fi fi-linkedin"></i></i></a>
+            {% endif %}
+            {% if object.author.profile.ex_link %}
+            <a href="{{ object.author.profile.ex_link }}" class="btn btn-just-icon btn-link"><i class="fi fi-world-o"></i></a>
+            {% endif %}
+          </small>
+        </p>
+        <p class="card-text" style="font-family: 'Cutive Mono', monospace;">{{object.author.profile.bio}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+<br><br>
+<div class="container">
+<div id = 'comments'>
+  <h3 style="text-align: center;">
+    Leave A Comment
+  </h3>
+  <div id = 'create_comment' >
+    <form action="{% url 'blog:post-comment' object.post_no %}" method="POST">
+        {% csrf_token %}
+        <br>
+        <label for="id_name"></label> 
+        <input type="text" name="name" class="form-control comment" placeholder="Your Name"  maxlength="100" required id="id_name" style="background-color: transparent;">
+        <label for="id_email"></label>
+        <input type="email" name="email" class="form-control comment"  placeholder="Your email won&#x27;t be displayed or shared" required maxlength="254" id="id_email" style="background-color: transparent;">
+        <label for="id_body"></label> 
+        <textarea name="body" cols="40" rows="10" class="form-control comment" placeholder="Add your comment " required id="id_body" style="background-color: transparent;"></textarea>
+          <br>
+        <div class="text-center"><button type="submit" class="btn btn-success">Post Comment</button></div>
+    </form>
+  </div>
+</div>
+  <br>
+  
+  {% if not object.comments.all %}
+        <div class="alert alert-warning" role="alert">
+           No comments on this post! care to comment?
+        </div>
+  {% else %}
+      {% for comment in object.comments.all %}
+          <div class="card w-100">
+            <div class="card-body">
+            <h5 class="card-title">{{ comment.name|title }}</h5>
+            <p class="card-text">
+              {{ comment.body }} 
+            <br>
+            <small>{{comment.date_added}}</small>
+            </p>
+<!--             <a href="#" class="btn btn-primary btn-sm">Like</a> -->
+            </div>
+          </div>
+          <br>
+      {% endfor %}
+  {% endif %}
+</div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{%extends 'base.html' %}
+
+{% block title %}
+  Delete Article
+{% endblock %}
+
+
+{% block content%}
+
+
+ <div class="container  my-5 py-5 z-depth-1">
+
+   {% if user.is_authenticated %}
+
+      {% if user.id == object.author.id or user.is_superuser %}
+
+
+        <form class="delete_post"  method="post"> 
+                  {% csrf_token %}
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-heading">Are You Sure You Wanna Delete this Thing</h4>
+              <p style="font-family: 'Oxanium', cursive;">{{ object.title |title}}</p>
+              <hr>
+              <p class="mb-0" style="font-family: 'Cutive Mono', monospace;">{{ object.snippet|safe }}</p>
+            </div>
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+          <br>
+          <p>
+            <a href="../"><button type="submit" class="btn btn-outline-success">Cancel</button></a>
+          </p>
+      {% else  %}
+      
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-heading">ERROR!</h4>
+              <p>You aren't authenticated to delete this Post</p>
+              <hr>
+              <p class="mb-0">Contact us if you think something is wrong</p>
+            </div>
+
+      {% endif %}
+
+  {% else  %}
+
+          <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">ERROR!</h4>
+            <p>This page doesn't  exists </p>
+            <hr>
+            <p class="mb-0">Contact us if you think something is wrong</p>
+          </div>
+
+      {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,187 @@
+{%extends 'base.html' %}
+
+
+
+{% block css %}
+<style>
+    
+
+
+    h2,h4{
+      font-family: 'Oxanium', cursive;
+      color: black;
+
+
+    }
+
+    p{
+      font-family: 'Cutive Mono', monospace;
+      color: black;
+    }
+
+
+.card-text {
+
+    font-family: 'Cutive Mono', monospace;
+    color: white;
+}
+
+.date {
+
+
+    font-size: 1em;
+}
+.tag {
+
+font-family: 'Oswald', sans-serif;
+font-size: 1.2em;
+}
+.text-muted{
+    word-wrap:break-word;
+    font-family: 'Cutive Mono', monospace;
+    margin: 10px;
+}
+section {
+
+    padding: 0;
+}
+
+.container,.view{
+  border-radius: 5px;
+/*  padding: 0;*/
+/*  margin: 0;*/
+}
+
+
+</style>
+
+{% endblock %}
+{% load blog_extra %}
+{% load imagekit %}
+
+<!--         Block Content                           -->
+{% block content%}
+<br><br><br>
+
+
+
+ <!--                        ...............Posts....................            -->
+
+
+<div class="container mt-5">
+
+
+  <!--Section: Content-->
+  <section class="dark-grey-text">
+
+    <!-- Section heading -->
+    <h2 class="text-center font-weight-bold mb-4 pb-2">Recent posts</h2>
+    <!-- Section description -->
+    <p class="text-center mx-auto w-responsive mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur veniam.</p>
+
+    {% for item in object_list %}
+
+                {% if count == 1 %}
+    <!-- Grid row -->
+    <div class="row align-items-center">
+
+      <!-- Grid column -->
+      <div class="col-lg-5">
+
+        <!-- Featured image -->
+        <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
+          {% thumbnail '781x521' item.get_image -- class="img-fluid" %}
+          <a>
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-lg-7" style="color: #03071e;">
+
+        <!-- Category -->
+        <a href="{% url 'blog:tag-view' item.category|slugify %}" style="color: #03045e;">
+          <h6 class="font-weight-bold mb-3"><i class="fas fa-tag fa-sm"></i> {{item.category|title }}</h6>
+        </a>
+        <!-- Post title -->
+        <h4 class="font-weight-bold mb-3"><strong>{{ item.title|title }}</strong></h4>
+        <!-- Excerpt -->
+        <p>{{ item.snippet|safe }}</p>
+        <!-- Post data -->
+        <p><a><strong>{{ item.author.first_name|title }}</strong></a><br><small><i class="far fa-clock fa-sm"></i> {{ item.date }}</p></small>
+        <!-- Read more button -->
+        <a class="btn btn-success btn-md btn-rounded mx-0" href="{{ item.get_absolute_url }}">Read more</a>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+    <hr class="my-5">
+    
+      {% else %}
+
+            <!-- Grid row -->
+    <div class="row align-items-center">
+
+      <!-- Grid column -->
+
+      <div class="col-lg-7" style="color: #03071e;">
+
+        <!-- Category -->
+        <a href="{% url 'blog:tag-view' item.category|slugify %}" style="color: #03045e;">
+          <h6 class="font-weight-bold mb-3"><i class="fas fa-tag fa-sm"></i> {{item.category|title }}</h6>
+        </a>
+        <!-- Post title -->
+        <h4 class="font-weight-bold mb-3"><strong>{{ item.title|title }}</strong></h4>
+        <!-- Excerpt -->
+        <p>{{ item.snippet|safe }}</p>
+        <!-- Post data -->
+        <p><a><strong>{{ item.author.first_name|title }}</strong></a><br><small><i class="far fa-clock fa-sm"></i> {{ item.date }}</p></small>
+        <!-- Read more button -->
+        <a class="btn btn-success btn-md btn-rounded mx-0" href="{{ item.get_absolute_url }}">Read more</a>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-lg-5">
+        <!-- Featured image -->
+        <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
+          {% thumbnail '781x521' item.get_image -- class="img-fluid" %}
+          <a>
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+    <hr class="my-5">
+    
+    {% endif %}
+
+
+            {% change_state count as count %}
+
+{% endfor %}
+
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+
+
+
+
+{% endblock %}
+

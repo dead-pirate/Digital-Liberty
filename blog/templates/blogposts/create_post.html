@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+
+  {% block title %}
+ Create Article
+  {% endblock %}
+
+
+{% block content%}
+  <br>
+  <div class="container  my-5 py-5 z-depth-1">
+    
+   {% if user.is_authenticated and user.profile.id %}
+    <strong><h3 style="text-align: center;"> CREATE A POST </h3></strong>
+  <br>
+
+
+      <form  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- POST NO -->
+          <div class="input-group col-lg-12 mb-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text bg-white px-4 border-md border-right-0">
+                      <i class="fa fa-list-ol"></i>
+                  </span>
+              </div> 
+              <input  type="number" name="post_no" class="form-control bg-white border-left-0 border-md" min="0" required id="id_post_no" placeholder="Post No." >
+          </div>
+
+        <!-- TITLE -->
+
+          <div class="input-group col-lg-12 mb-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text bg-white px-4 border-md border-right-0">
+                      <i class="fa fa-feather-alt"></i>
+                  </span>
+              </div>
+              <input  class="form-control bg-white border-left-0 border-md" name="title" placeholder="Your Title" maxlength="300" required id="id_title" >
+          </div>
+
+          <!-- CATEGORY -->
+
+          <div class="input-group col-lg-12 mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-white px-4 border-md border-right-0">
+                  <i class="fas fa-tag "></i>
+              </span>
+            </div>
+
+          {{ form.category }}
+
+          </div>
+
+          <!-- BLOGPOST -->
+
+          <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+          <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+
+          <div class="input-group col-lg-12 mb-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text bg-white px-4 border-md border-right-0">
+                      <i class="fa fa-signature"></i>
+                  </span>
+              </div>
+                <!-- CK EDITOR -->
+
+           {{ form.content }}
+
+          </div>
+          <!-- IMAGE -->
+
+            <div class="input-group col-lg-12 mb-4">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input"  name="image" accept="image/*" id="id_image">
+                  <label class="custom-file-label" ><i class="fa fa-image"></i></label>
+                </div>
+                
+              </div>
+              
+                <script type="application/javascript">
+                    $('input[type="file"]').change(function(e){
+                        var fileName = e.target.files[0].name;
+                        $('.custom-file-label').html(fileName);
+                    });
+                </script>
+
+
+          <!--     AUTHOR    -->
+
+                    {{form.author}}
+
+                  <script type="text/javascript">
+                  var name = "{{ user.id }}";
+                  document.getElementById("auth").value = name;
+                  </script>
+
+
+          <!-- SNIPPET -->
+
+            <div class="input-group col-lg-12 mb-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text bg-white px-4 border-md border-right-0">
+                      <i class="fa fa-cut"></i>
+                  </span>
+                  <textarea name="snippet" cols="150" rows="5" class="form-control bg-white border-left-0 border-md" placeholder="Add a snippet for the post" maxlength="100" required id="id_snippet"></textarea>
+              </div>
+            </div>
+            <div class="text-center">  
+              <button type="submit" class="btn btn-success"> Post</button>
+            </div>
+
+      </form>
+
+    {% else  %}
+
+         <!-- <meta http-equiv="REFRESH" content="0;url=404.html"> -->
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-heading">ERROR!</h4>
+              <p>This page doesn't  exists </p>
+              <hr>
+              <p class="mb-0">Contact us if you think something is wrong</p>
+            </div>
+        
+    {% endif %}
+
+
+</div>    <!--container-->
+
+
+{% endblock %}

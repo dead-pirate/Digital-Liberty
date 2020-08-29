@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<style type="text/css">
+	
+li {
+	 list-style-type: none;
+}
+
+</style>
+{% endblock %}
+{% block title %}
+  Tags
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container my-5 py-5 z-depth-1 ">
+	<h3 style="text-align: center;">Tags</h3>
+	<br>
+{% for item in tags %}
+	<div class="alert alert-info" role="alert">
+		<li>
+		    <a href="{% url 'blog:tag-view' item|slugify %}">
+			<strong>{{ item|title }}</strong>
+			</a>
+		</li>
+	</div>
+
+{% endfor %}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
